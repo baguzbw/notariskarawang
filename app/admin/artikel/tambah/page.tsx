@@ -53,42 +53,42 @@ export default function TambahArtikelPage() {
         <Link href="/admin/artikel" className="text-dongker/40 hover:text-dongker transition-colors">
           <ArrowLeft size={20} />
         </Link>
-        <h1 className="font-serif text-3xl font-semibold text-dongker">Tambah Artikel</h1>
+        <h1 className="text-3xl font-semibold text-dongker">Tambah Artikel</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
         {error && (
           <div className="bg-red-50 border border-red-200 p-4">
-            <p className="font-sans text-sm text-red-600">{error}</p>
+            <p className="text-sm text-red-600">{error}</p>
           </div>
         )}
 
         <div>
-          <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Judul *</label>
+          <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Judul *</label>
           <input
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
             required
-            className="w-full border border-cream-dark bg-cream-light text-dongker font-sans text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
+            className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
           />
         </div>
 
         <div>
-          <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Gambar Thumbnail</label>
+          <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Gambar Thumbnail</label>
           <ImageUpload value={thumbnailUrl} onChange={setThumbnailUrl} folder="artikel" />
         </div>
 
         <div>
-          <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Isi Artikel *</label>
+          <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Isi Artikel *</label>
           <textarea
             value={konten}
             onChange={(e) => setKonten(e.target.value)}
             required
             rows={16}
             placeholder="Tulis isi artikel di sini. Tekan Enter untuk paragraf baru."
-            className="w-full border border-cream-dark bg-cream-light text-dongker font-sans text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y"
+            className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y"
           />
-          <p className="font-sans text-xs text-dongker/30 mt-1">Enter = paragraf baru di halaman publik.</p>
+          <p className="text-xs text-dongker/30 mt-1">Enter = paragraf baru di halaman publik.</p>
         </div>
 
         <div className="flex gap-4">

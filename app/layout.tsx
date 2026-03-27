@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import "./globals.css";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Kantor Notaris",
@@ -13,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body>{children}</body>
+      <body className={`${outfit.className} bg-cream text-dongker antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

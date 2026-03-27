@@ -15,8 +15,8 @@ export default async function AdminArtikelPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="font-serif text-3xl font-semibold text-dongker">Artikel Hukum</h1>
-          <p className="font-sans text-sm text-dongker/50 mt-1">
+          <h1 className="text-3xl font-semibold text-dongker">Artikel Hukum</h1>
+          <p className="text-sm text-dongker/50 mt-1">
             {artikels?.length ?? 0} artikel
           </p>
         </div>
@@ -26,7 +26,7 @@ export default async function AdminArtikelPage() {
       </div>
 
       <div className="bg-cream-light border border-cream-dark overflow-hidden">
-        <table className="w-full text-sm font-sans">
+        <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-cream-dark bg-cream-dark/40">
               <th className="text-left px-6 py-4 font-semibold text-dongker">Judul</th>

@@ -27,10 +27,10 @@ export default async function AdminDashboardPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl font-semibold text-dongker mb-2">
+      <h1 className="text-3xl font-semibold text-dongker mb-2">
         Dashboard
       </h1>
-      <p className="font-sans text-sm text-dongker/50 mb-8">
+      <p className="text-sm text-dongker/50 mb-8">
         Selamat datang di panel admin Kantor Notaris.
       </p>
 
@@ -43,17 +43,17 @@ export default async function AdminDashboardPage() {
               </div>
               <Link
                 href={add}
-                className="flex items-center gap-1 font-sans text-xs text-dongker/50 hover:text-dongker transition-colors"
+                className="flex items-center gap-1 text-xs text-dongker/50 hover:text-dongker transition-colors"
               >
                 <PlusCircle size={13} /> Tambah
               </Link>
             </div>
-            <p className="font-serif text-3xl font-bold text-dongker mb-1">
+            <p className="text-3xl font-bold text-dongker mb-1">
               {value}
             </p>
             <Link
               href={href}
-              className="font-sans text-sm text-dongker/50 hover:text-dongker transition-colors"
+              className="text-sm text-dongker/50 hover:text-dongker transition-colors"
             >
               {label} →
             </Link>

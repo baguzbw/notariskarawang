@@ -61,10 +61,10 @@ export default function LayananPage() {
         {/* Header */}
         <section className="bg-dongker text-cream py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="font-sans text-gold text-xs tracking-[0.2em] uppercase mb-3">
+            <p className="text-gold text-xs tracking-[0.2em] uppercase mb-3">
               Apa Yang Kami Tawarkan
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl font-semibold mb-4">
+            <h1 className="text-4xl md:text-5xl font-semibold mb-4">
               Daftar Layanan
             </h1>
             <div className="w-16 h-0.5 bg-gold" />
@@ -82,10 +82,10 @@ export default function LayananPage() {
                   <div className="w-11 h-11 bg-dongker flex items-center justify-center mb-4 group-hover:bg-dongker-light transition-colors">
                     <Icon size={20} className="text-gold" />
                   </div>
-                  <h3 className="font-serif text-base font-semibold text-dongker mb-2">
+                  <h3 className="text-base font-semibold text-dongker mb-2">
                     {nama}
                   </h3>
-                  <p className="font-sans text-sm text-dongker/60 leading-relaxed">
+                  <p className="text-sm text-dongker/60 leading-relaxed">
                     {deskripsi}
                   </p>
                 </div>

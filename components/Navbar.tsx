@@ -24,7 +24,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <div className="w-8 h-8 border-2 border-gold flex items-center justify-center">
-              <span className="font-serif text-gold font-bold text-sm">N</span>
+              <span className="text-gold font-bold text-sm">N</span>
             </div>
           </Link>
 
@@ -34,7 +34,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-sans text-cream/80 hover:text-cream hover:bg-dongker-light transition-colors duration-150 rounded-sm"
+                className="px-3 py-2 text-sm text-cream/80 hover:text-cream hover:bg-dongker-light transition-colors duration-150 rounded-sm"
               >
                 {link.label}
               </Link>
@@ -59,7 +59,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block px-6 py-3 text-sm font-sans text-cream/80 hover:text-cream hover:bg-dongker-light transition-colors"
+              className="block px-6 py-3 text-sm text-cream/80 hover:text-cream hover:bg-dongker-light transition-colors"
             >
               {link.label}
             </Link>

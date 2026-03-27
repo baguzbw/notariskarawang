@@ -37,12 +37,12 @@ export default async function ArtikelPage({ searchParams }: Props) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between">
               <div>
-                <p className="font-sans text-gold text-xs tracking-[0.2em] uppercase mb-3">Edukasi Hukum</p>
-                <h1 className="font-serif text-4xl md:text-5xl font-semibold mb-4">Artikel Hukum</h1>
+                <p className="text-gold text-xs tracking-[0.2em] uppercase mb-3">Edukasi Hukum</p>
+                <h1 className="text-4xl md:text-5xl font-semibold mb-4">Artikel Hukum</h1>
                 <div className="w-16 h-0.5 bg-gold" />
               </div>
               {/* {count !== null && count > 0 && (
-                <p className="font-sans text-xs text-cream/30 hidden md:block">{count} artikel tersedia</p>
+                <p className="text-xs text-cream/30 hidden md:block">{count} artikel tersedia</p>
               )} */}
             </div>
           </div>
@@ -63,28 +63,28 @@ export default async function ArtikelPage({ searchParams }: Props) {
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center">
                               <div className="w-12 h-0.5 bg-gold mx-auto mb-3" />
-                              <span className="font-serif text-cream/20 text-sm">Artikel Hukum</span>
+                              <span className="text-cream/20 text-sm">Artikel Hukum</span>
                             </div>
                           </div>
                         )}
                         <div className="absolute top-4 left-4 bg-gold px-3 py-1 z-10">
-                          <span className="font-sans text-xs font-bold text-dongker-dark tracking-widest uppercase">Terbaru</span>
+                          <span className="text-xs font-bold text-dongker-dark tracking-widest uppercase">Terbaru</span>
                         </div>
                       </div>
                       <div className="bg-cream-light p-8 lg:p-12 flex flex-col justify-center">
                         <div className="flex items-center gap-2 text-dongker/30 mb-4">
                           <Calendar size={13} />
-                          <span className="font-sans text-xs">
+                          <span className="text-xs">
                             {new Date(featured.created_at).toLocaleDateString("id-ID", {
                               day: "numeric", month: "long", year: "numeric",
                             })}
                           </span>
                         </div>
-                        <h2 className="font-serif text-2xl md:text-3xl font-semibold text-dongker mb-5 leading-snug group-hover:text-dongker-light transition-colors">
+                        <h2 className="text-2xl md:text-3xl font-semibold text-dongker mb-5 leading-snug group-hover:text-dongker-light transition-colors">
                           {featured.judul}
                         </h2>
                         <div className="w-10 h-0.5 bg-gold mb-6" />
-                        <div className="flex items-center gap-2 font-sans text-sm font-semibold text-dongker group-hover:gap-3 transition-all">
+                        <div className="flex items-center gap-2 text-sm font-semibold text-dongker group-hover:gap-3 transition-all">
                           Baca Selengkapnya <ArrowRight size={15} />
                         </div>
                       </div>
@@ -95,7 +95,7 @@ export default async function ArtikelPage({ searchParams }: Props) {
                 {rest && rest.length > 0 && (
                   <>
                     <div className="flex items-center gap-4 mb-8">
-                      <p className="font-sans text-xs text-dongker/40 tracking-widest uppercase whitespace-nowrap">
+                      <p className="text-xs text-dongker/40 tracking-widest uppercase whitespace-nowrap">
                         {page === 1 ? "Artikel Lainnya" : `Halaman ${page}`}
                       </p>
                       <div className="h-px bg-cream-dark flex-1" />
@@ -117,16 +117,16 @@ export default async function ArtikelPage({ searchParams }: Props) {
                           <div className="p-5">
                             <div className="flex items-center gap-2 text-dongker/30 mb-3">
                               <Calendar size={11} />
-                              <span className="font-sans text-xs">
+                              <span className="text-xs">
                                 {new Date(artikel.created_at).toLocaleDateString("id-ID", {
                                   day: "numeric", month: "short", year: "numeric",
                                 })}
                               </span>
                             </div>
-                            <h3 className="font-serif text-[15px] font-semibold text-dongker mb-4 leading-snug group-hover:text-dongker-light transition-colors line-clamp-3">
+                            <h3 className="text-[15px] font-semibold text-dongker mb-4 leading-snug group-hover:text-dongker-light transition-colors line-clamp-3">
                               {artikel.judul}
                             </h3>
-                            <div className="flex items-center gap-1.5 text-gold font-sans text-xs font-semibold">
+                            <div className="flex items-center gap-1.5 text-gold text-xs font-semibold">
                               Baca <ArrowRight size={12} />
                             </div>
                           </div>
@@ -139,7 +139,7 @@ export default async function ArtikelPage({ searchParams }: Props) {
                 {totalPages > 1 && (
                   <div className="flex items-center justify-center gap-1.5">
                     <Link href={page <= 1 ? "#" : `/artikel?page=${page - 1}`}
-                      className={`flex items-center gap-1 px-4 py-2.5 font-sans text-sm border transition-colors
+                      className={`flex items-center gap-1 px-4 py-2.5 text-sm border transition-colors
                         ${page <= 1 ? "border-cream-dark text-dongker/20 pointer-events-none"
                           : "border-cream-dark text-dongker hover:bg-dongker hover:text-cream hover:border-dongker"}`}>
                       <ChevronLeft size={14} /> Sebelumnya
@@ -148,13 +148,13 @@ export default async function ArtikelPage({ searchParams }: Props) {
                       const isNear = Math.abs(p - page) <= 1 || p === 1 || p === totalPages;
                       if (!isNear) {
                         if ((p === 2 && page > 3) || (p === totalPages - 1 && page < totalPages - 2)) {
-                          return <span key={p} className="font-sans text-sm text-dongker/30 w-6 text-center">…</span>;
+                          return <span key={p} className="text-sm text-dongker/30 w-6 text-center">…</span>;
                         }
                         return null;
                       }
                       return (
                         <Link key={p} href={`/artikel?page=${p}`}
-                          className={`w-10 h-10 flex items-center justify-center font-sans text-sm border transition-colors
+                          className={`w-10 h-10 flex items-center justify-center text-sm border transition-colors
                             ${p === page ? "bg-dongker text-cream border-dongker font-semibold"
                               : "border-cream-dark text-dongker hover:bg-dongker-light hover:text-cream hover:border-dongker-light"}`}>
                           {p}
@@ -162,7 +162,7 @@ export default async function ArtikelPage({ searchParams }: Props) {
                       );
                     })}
                     <Link href={page >= totalPages ? "#" : `/artikel?page=${page + 1}`}
-                      className={`flex items-center gap-1 px-4 py-2.5 font-sans text-sm border transition-colors
+                      className={`flex items-center gap-1 px-4 py-2.5 text-sm border transition-colors
                         ${page >= totalPages ? "border-cream-dark text-dongker/20 pointer-events-none"
                           : "border-cream-dark text-dongker hover:bg-dongker hover:text-cream hover:border-dongker"}`}>
                       Berikutnya <ChevronRight size={14} />
@@ -173,7 +173,7 @@ export default async function ArtikelPage({ searchParams }: Props) {
             ) : (
               <div className="text-center py-32">
                 <div className="w-12 h-0.5 bg-gold/30 mx-auto mb-6" />
-                <p className="font-serif text-xl text-dongker/20">Belum ada artikel.</p>
+                <p className="text-xl text-dongker/20">Belum ada artikel.</p>
               </div>
             )}
           </div>

@@ -49,7 +49,7 @@ export default function EditKegiatanPage() {
     }
   }
 
-  if (fetching) return <p className="font-sans text-dongker/40 text-sm">Memuat data...</p>;
+  if (fetching) return <p className="text-dongker/40 text-sm">Memuat data...</p>;
 
   return (
     <div>
@@ -57,43 +57,43 @@ export default function EditKegiatanPage() {
         <Link href="/admin/kegiatan" className="text-dongker/40 hover:text-dongker transition-colors">
           <ArrowLeft size={20} />
         </Link>
-        <h1 className="font-serif text-3xl font-semibold text-dongker">Edit Kegiatan</h1>
+        <h1 className="text-3xl font-semibold text-dongker">Edit Kegiatan</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
         {error && (
           <div className="bg-red-50 border border-red-200 p-4">
-            <p className="font-sans text-sm text-red-600">{error}</p>
+            <p className="text-sm text-red-600">{error}</p>
           </div>
         )}
 
         <div>
-          <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Judul *</label>
+          <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Judul *</label>
           <input value={judul} onChange={(e) => setJudul(e.target.value)} required
-            className="w-full border border-cream-dark bg-cream-light text-dongker font-sans text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors" />
+            className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors" />
         </div>
 
         <div>
-          <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Deskripsi *</label>
+          <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Deskripsi *</label>
           <textarea value={deskripsi} onChange={(e) => setDeskripsi(e.target.value)} required rows={6}
-            className="w-full border border-cream-dark bg-cream-light text-dongker font-sans text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y" />
+            className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y" />
         </div>
 
         <div>
-          <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Gambar</label>
+          <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Gambar</label>
           <ImageUpload value={gambarUrl} onChange={setGambarUrl} folder="kegiatan" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Tanggal Kegiatan</label>
+            <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Tanggal Kegiatan</label>
             <input type="date" value={tanggal} onChange={(e) => setTanggal(e.target.value)}
-              className="w-full border border-cream-dark bg-cream-light text-dongker font-sans text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors" />
+              className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors" />
           </div>
           <div>
-            <label className="font-sans text-xs text-dongker/50 tracking-wider uppercase block mb-2">Lokasi</label>
+            <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Lokasi</label>
             <input value={lokasi} onChange={(e) => setLokasi(e.target.value)}
-              className="w-full border border-cream-dark bg-cream-light text-dongker font-sans text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors" />
+              className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors" />
           </div>
         </div>
 

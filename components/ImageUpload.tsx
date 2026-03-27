@@ -77,13 +77,13 @@ export default function ImageUpload({ value, onChange, folder = "images" }: Prop
           {uploading ? (
             <div className="flex flex-col items-center gap-2">
               <Loader2 size={20} className="text-dongker animate-spin" />
-              <span className="font-sans text-xs text-dongker/50">Mengunggah...</span>
+              <span className="text-xs text-dongker/50">Mengunggah...</span>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <Upload size={20} className="text-dongker/40" />
-              <span className="font-sans text-xs text-dongker/50">Klik untuk upload</span>
-              <span className="font-sans text-xs text-dongker/30">Maks. 2MB</span>
+              <span className="text-xs text-dongker/50">Klik untuk upload</span>
+              <span className="text-xs text-dongker/30">Maks. 2MB</span>
             </div>
           )}
           <input
@@ -97,7 +97,7 @@ export default function ImageUpload({ value, onChange, folder = "images" }: Prop
         </label>
       )}
       {error && (
-        <p className="font-sans text-xs text-red-500 mt-1">{error}</p>
+        <p className="text-xs text-red-500 mt-1">{error}</p>
       )}
     </div>
   );

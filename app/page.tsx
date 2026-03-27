@@ -20,21 +20,28 @@ export default function HomePage() {
           <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "repeating-linear-gradient(45deg, #C9A84C 0, #C9A84C 1px, transparent 0, transparent 50%)", backgroundSize: "20px 20px" }} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 relative">
             <div className="max-w-3xl">
-              <div className="inline-block border border-gold/40 px-4 py-1.5 mb-6">
-                <span className="font-sans text-gold text-xs tracking-[0.25em] uppercase">Notaris & PPAT Resmi — Karawang</span>
+              <div className="inline-block border border-gold/40 px-4 py-1.5 mb-8">
+                <span className="text-gold text-xs tracking-[0.25em] uppercase">Notaris & PPAT Resmi — Karawang</span>
               </div>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-2">Norman Tuah</h1>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-6">
-                <em>Hamonangan Sinaga</em>
+              <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.15]">
+                Norman Tuah <br />
+                <span className="italic font-light text-6xl md:text-7xl block mt-2">
+                  Hamonangan Sinaga
+                </span>
               </h1>
-              <p className="font-sans text-cream/50 text-sm tracking-widest uppercase mb-2">Shut, SH, M.Kn</p>
-              <div className="w-16 h-0.5 bg-gold mb-6" />
-              <p className="font-sans text-cream/70 text-lg leading-relaxed mb-10 max-w-xl">Melayani kebutuhan kenotariatan dan pertanahan masyarakat Karawang dengan standar hukum yang akurat, transparan, dan terpercaya.</p>
+              <p className="text-gold-light/80 text-sm md:text-base mt-6 tracking-widest uppercase">
+                Shut, SH, M.Kn
+              </p>
+              <div className="w-16 h-0.5 bg-gold mt-2" />
+              <p className="text-cream/70 text-lg leading-relaxed mt-8 mb-10 max-w-xl">
+                Melayani kebutuhan kenotariatan dan pertanahan masyarakat Karawang dengan standar hukum yang akurat, transparan, dan terpercaya.
+              </p>
+
               <div className="flex flex-wrap gap-4">
                 <Link href="/layanan" className="btn-primary inline-flex items-center gap-2">
                   Lihat Layanan <ArrowRight size={16} />
                 </Link>
-                <Link href="/profil-notaris" className="border border-cream/30 text-cream px-6 py-3 font-sans font-medium tracking-wide hover:border-gold hover:text-gold transition-colors inline-block">
+                <Link href="/profil-notaris" className="border border-cream/30 text-cream px-6 py-3 font-medium tracking-wide hover:border-gold hover:text-gold transition-colors inline-block">
                   Profil Notaris
                 </Link>
               </div>
@@ -48,13 +55,13 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <Phone size={15} className="text-dongker-dark" />
-                <span className="font-sans text-sm font-semibold text-dongker-dark">(0267) 8634232 / 0812 9151 9609</span>
+                <span className="text-sm font-semibold text-dongker-dark">(0267) 8634232 / 0812 9151 9609</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={15} className="text-dongker-dark" />
-                <span className="font-sans text-sm font-semibold text-dongker-dark">normantuahhsinaga@yahoo.com</span>
+                <span className="text-sm font-semibold text-dongker-dark">normantuahhsinaga@yahoo.co.id</span>
               </div>
-              <span className="font-sans text-sm text-dongker-dark font-medium">Senin – Jumat: 08.00 – 16.00 WIB</span>
+              <span className="text-sm text-dongker-dark font-medium">Senin – Jumat: 08.00 – 16.00 WIB</span>
             </div>
           </div>
         </section>
@@ -63,7 +70,7 @@ export default function HomePage() {
         <section className="bg-cream py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="font-sans text-gold text-xs tracking-[0.2em] uppercase mb-3">Yang Kami Tawarkan</p>
+              <p className="text-gold text-xs tracking-[0.2em] uppercase mb-3">Yang Kami Tawarkan</p>
               <h2 className="section-title mb-4">Layanan Kenotariatan</h2>
               <div className="divider-gold mx-auto" />
             </div>
@@ -73,8 +80,8 @@ export default function HomePage() {
                   <div className="w-10 h-10 bg-dongker flex items-center justify-center mb-4">
                     <Icon size={18} className="text-gold" />
                   </div>
-                  <h3 className="font-serif text-base font-semibold text-dongker mb-2">{label}</h3>
-                  <p className="font-sans text-sm text-dongker/60 leading-relaxed">{desc}</p>
+                  <h3 className="text-base font-semibold text-dongker mb-2">{label}</h3>
+                  <p className="text-sm text-dongker/60 leading-relaxed">{desc}</p>
                 </div>
               ))}
             </div>
@@ -91,14 +98,14 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
-                <p className="font-sans text-gold text-xs tracking-[0.2em] uppercase mb-3">Mengapa Kami</p>
-                <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-4 leading-tight">
+                <p className="text-gold text-xs tracking-[0.2em] uppercase mb-3">Mengapa Kami</p>
+                <h2 className="text-3xl md:text-4xl font-semibold mb-4 leading-tight">
                   Pengalaman & Integritas
                   <br />
                   <em className="font-normal">dalam Setiap Akta</em>
                 </h2>
                 <div className="w-16 h-0.5 bg-gold mb-6" />
-                <p className="font-sans text-cream/60 leading-relaxed mb-8">Kantor Notaris & PPAT Norman Tuah Hamonangan Sinaga telah dipercaya melayani masyarakat Karawang dalam berbagai kebutuhan hukum pertanahan dan kenotariatan.</p>
+                <p className="text-cream/60 leading-relaxed mb-8">Kantor Notaris & PPAT Norman Tuah Hamonangan Sinaga telah dipercaya melayani masyarakat Karawang dalam berbagai kebutuhan hukum pertanahan dan kenotariatan.</p>
                 <Link href="/prosedur" className="btn-primary inline-flex items-center gap-2">
                   Lihat Alur Pelayanan <ArrowRight size={16} />
                 </Link>
@@ -112,8 +119,8 @@ export default function HomePage() {
                 ].map((item) => (
                   <div key={item.label} className="border border-dongker-light p-5">
                     <CheckCircle size={18} className="text-gold mb-3" />
-                    <p className="font-serif text-sm font-semibold text-cream mb-1">{item.label}</p>
-                    <p className="font-sans text-xs text-cream/40">{item.sub}</p>
+                    <p className="text-sm font-semibold text-cream mb-1">{item.label}</p>
+                    <p className="text-xs text-cream/40">{item.sub}</p>
                   </div>
                 ))}
               </div>

@@ -26,9 +26,9 @@ export default function AdminSidebar() {
       <div className="p-6 border-b border-dongker-light/30">
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 border border-gold flex items-center justify-center">
-            <span className="font-serif text-gold font-bold text-xs">N</span>
+            <span className="text-gold font-bold text-xs">N</span>
           </div>
-          <span className="font-serif text-sm font-semibold text-cream">
+          <span className="text-sm font-semibold text-cream">
             Panel Admin
           </span>
         </div>
@@ -42,7 +42,7 @@ export default function AdminSidebar() {
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 text-sm font-sans transition-colors rounded-sm
+              className={`flex items-center gap-3 px-3 py-2.5 text-sm transition-colors rounded-sm
                 ${active
                   ? "bg-dongker-light text-cream"
                   : "text-cream/60 hover:text-cream hover:bg-dongker-light/50"
@@ -59,7 +59,7 @@ export default function AdminSidebar() {
       <div className="p-4 border-t border-dongker-light/30">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-sans text-cream/60 hover:text-cream hover:bg-dongker-light/50 transition-colors rounded-sm"
+          className="flex items-center gap-3 w-full px-3 py-2.5 text-sm text-cream/60 hover:text-cream hover:bg-dongker-light/50 transition-colors rounded-sm"
         >
           <LogOut size={16} />
           Keluar

@@ -31,7 +31,7 @@ export default function AdminLayout({
   if (checking) {
     return (
       <div className="min-h-screen bg-dongker flex items-center justify-center">
-        <p className="font-sans text-cream/40 text-sm">Memeriksa sesi...</p>
+        <p className="text-cream/40 text-sm">Memeriksa sesi...</p>
       </div>
     );
   }

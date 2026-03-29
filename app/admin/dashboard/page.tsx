@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { supabase } from "@/lib/supabase";
 import { Calendar, FileText, PlusCircle } from "lucide-react";
 import Link from "next/link";

@@ -23,20 +23,19 @@ export default function HomePage() {
               <div className="inline-block border border-gold/40 px-4 py-1.5 mb-8">
                 <span className="text-gold text-xs tracking-[0.25em] uppercase">Notaris & PPAT Resmi — Karawang</span>
               </div>
-              <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.15]">
+              <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.15] text-cream">
                 Norman Tuah <br />
-                <span className="italic font-light text-6xl md:text-7xl block mt-2">
+                <span className="block mt-2">
                   Hamonangan Sinaga
                 </span>
               </h1>
-              <p className="text-gold-light/80 text-sm md:text-base mt-6 tracking-widest uppercase">
+              <p className="text-gold-light text-sm md:text-base mt-4 font-semibold tracking-[0.2em] uppercase">
                 Shut, SH, M.Kn
               </p>
-              <div className="w-16 h-0.5 bg-gold mt-2" />
-              <p className="text-cream/70 text-lg leading-relaxed mt-8 mb-10 max-w-xl">
+              <div className="w-16 h-0.5 bg-gold mt-4 mb-8" />
+              <p className="text-cream/70 text-lg leading-relaxed mb-10 max-w-xl">
                 Melayani kebutuhan kenotariatan dan pertanahan masyarakat Karawang dengan standar hukum yang akurat, transparan, dan terpercaya.
               </p>
-
               <div className="flex flex-wrap gap-4">
                 <Link href="/layanan" className="btn-primary inline-flex items-center gap-2">
                   Lihat Layanan <ArrowRight size={16} />

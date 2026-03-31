@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { LayoutDashboard, FileText, Calendar, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, Calendar, LogOut, Briefcase } from "lucide-react";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/artikel", label: "Artikel Hukum", icon: FileText },
   { href: "/admin/kegiatan", label: "Info Kegiatan", icon: Calendar },
+  { href: "/admin/layanan", label: "Layanan", icon: Briefcase },
 ];
 
 export default function AdminSidebar() {
@@ -22,19 +23,15 @@ export default function AdminSidebar() {
 
   return (
     <aside className="w-60 bg-dongker-dark text-cream min-h-screen flex flex-col shrink-0">
-      {/* Logo */}
       <div className="p-6 border-b border-dongker-light/30">
         <div className="flex items-center gap-3">
           <div className="w-7 h-7 border border-gold flex items-center justify-center">
             <span className="text-gold font-bold text-xs">N</span>
           </div>
-          <span className="text-sm font-semibold text-cream">
-            Panel Admin
-          </span>
+          <span className="text-sm font-semibold text-cream">Panel Admin</span>
         </div>
       </div>
 
-      {/* Nav */}
       <nav className="flex-1 p-4 space-y-1">
         {navItems.map(({ href, label, icon: Icon }) => {
           const active = pathname === href || pathname.startsWith(href + "/");
@@ -55,7 +52,6 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      {/* Logout */}
       <div className="p-4 border-t border-dongker-light/30">
         <button
           onClick={handleLogout}

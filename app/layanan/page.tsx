@@ -1,64 +1,19 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { FileText, Scale, Home, Users, FileSignature, Landmark, ScrollText, Building } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
-const layanan = [
-  {
-    icon: FileText,
-    nama: "Akta Jual Beli",
-    deskripsi:
-      "Pembuatan akta jual beli tanah dan/atau bangunan yang sah secara hukum sebagai bukti perpindahan hak atas properti.",
-  },
-  {
-    icon: Scale,
-    nama: "Akta Perjanjian",
-    deskripsi:
-      "Penyusunan dan legalisasi berbagai jenis perjanjian termasuk perjanjian kerjasama, sewa-menyewa, dan lainnya.",
-  },
-  {
-    icon: Home,
-    nama: "Akta PPAT",
-    deskripsi:
-      "Layanan sebagai Pejabat Pembuat Akta Tanah meliputi balik nama sertifikat, hibah tanah, dan pemisahan/penggabungan bidang tanah.",
-  },
-  {
-    icon: Users,
-    nama: "Akta Pendirian PT/CV",
-    deskripsi:
-      "Pendirian badan usaha berbadan hukum (PT) maupun tidak berbadan hukum (CV, Firma) beserta pengesahannya.",
-  },
-  {
-    icon: FileSignature,
-    nama: "Legalisasi & Waarmerking",
-    deskripsi:
-      "Pengesahan tanda tangan dan legalisasi dokumen untuk keperluan hukum baik di dalam maupun luar negeri.",
-  },
-  {
-    icon: Landmark,
-    nama: "Akta Wasiat",
-    deskripsi:
-      "Pembuatan akta wasiat (testament) sesuai ketentuan hukum perdata Indonesia dengan kerahasiaan terjaga.",
-  },
-  {
-    icon: ScrollText,
-    nama: "Surat Kuasa",
-    deskripsi:
-      "Pembuatan surat kuasa notariil untuk berbagai keperluan hukum yang memerlukan kewenangan pihak lain.",
-  },
-  {
-    icon: Building,
-    nama: "Akta Risalah RUPS",
-    deskripsi:
-      "Pencatatan dan pembuatan risalah Rapat Umum Pemegang Saham (RUPS) sesuai ketentuan hukum perusahaan.",
-  },
-];
+export const revalidate = 3600;
 
-export default function LayananPage() {
+export default async function LayananPage() {
+  const { data: layanan } = await supabase
+    .from("layanan")
+    .select("*")
+    .order("urutan", { ascending: true });
+
   return (
     <>
       <Navbar />
       <main>
-        {/* Header */}
         <section className="bg-dongker text-cream py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-gold text-xs tracking-[0.2em] uppercase mb-3">
@@ -73,24 +28,31 @@ export default function LayananPage() {
 
         <section className="bg-cream py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {layanan.map(({ icon: Icon, nama, deskripsi }) => (
-                <div
-                  key={nama}
-                  className="bg-cream-light border border-cream-dark p-6 hover:shadow-lg hover:border-gold/30 transition-all duration-200 group"
-                >
-                  <div className="w-11 h-11 bg-dongker flex items-center justify-center mb-4 group-hover:bg-dongker-light transition-colors">
-                    <Icon size={20} className="text-gold" />
+            {layanan && layanan.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {layanan.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="relative bg-cream-light border border-cream-dark p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group overflow-hidden"
+                  >
+                    <span className="absolute -top-3 -right-1 font-serif text-8xl font-bold text-dongker/[0.06] select-none leading-none group-hover:text-gold/10 transition-colors duration-300">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="w-8 h-0.5 bg-gold mb-5" />
+                    <h3 className="text-base font-semibold text-dongker mb-3 leading-snug relative z-10">
+                      {item.nama}
+                    </h3>
+                    <p className="text-sm text-dongker/55 leading-relaxed relative z-10">
+                      {item.deskripsi}
+                    </p>
                   </div>
-                  <h3 className="text-base font-semibold text-dongker mb-2">
-                    {nama}
-                  </h3>
-                  <p className="text-sm text-dongker/60 leading-relaxed">
-                    {deskripsi}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <p className="text-dongker/40">Belum ada layanan.</p>
+              </div>
+            )}
           </div>
         </section>
       </main>

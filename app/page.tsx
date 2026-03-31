@@ -1,15 +1,10 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
+import { getProfilKantor } from "@/lib/profil";
 import {
-  ArrowRight,
-  CheckCircle,
-  Mail,
-  Phone,
-  ShieldCheck,
-  Award,
-  Zap,
-  HeartHandshake,
+  ArrowRight, Mail, Phone,
+  ShieldCheck, Award, Zap, HeartHandshake,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -23,11 +18,21 @@ const keunggulan = [
 ];
 
 export default async function HomePage() {
-  const { data: layananPreview } = await supabase
-    .from("layanan")
-    .select("id, nama, deskripsi")
-    .order("urutan", { ascending: true })
-    .limit(4);
+  const [profil, { data: layananPreview }] = await Promise.all([
+    getProfilKantor(),
+    supabase
+      .from("layanan")
+      .select("id, nama, deskripsi")
+      .order("urutan", { ascending: true })
+      .limit(4),
+  ]);
+
+  const telepon = profil?.telepon ?? "(0267) 8634232";
+  const hp = profil?.hp ?? "0812 9151 9609";
+  const email = profil?.email ?? "normantuahhsinaga@yahoo.co.id";
+  const jam = profil?.jam_operasional ?? "Senin – Jumat: 08.00 – 16.00 WIB";
+  const nama = profil?.nama_notaris ?? "Norman Tuah Hamonangan Sinaga";
+  const gelar = profil?.gelar ?? "Shut, SH, M.Kn";
 
   return (
     <>
@@ -51,11 +56,13 @@ export default async function HomePage() {
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.15] text-cream">
-                Norman Tuah <br />
-                <span className="block mt-2">Hamonangan Sinaga</span>
+                {nama.split(" ").slice(0, 2).join(" ")} <br />
+                <span className="block mt-2">
+                  {nama.split(" ").slice(2).join(" ")}
+                </span>
               </h1>
               <p className="text-gold text-sm md:text-base mt-4 font-semibold tracking-[0.2em] uppercase">
-                Shut, SH, M.Kn
+                {gelar}
               </p>
               <div className="w-16 h-0.5 bg-gold mt-4 mb-8" />
               <p className="text-cream/70 text-lg leading-relaxed mb-10 max-w-xl">
@@ -84,18 +91,14 @@ export default async function HomePage() {
               <div className="flex items-center gap-2">
                 <Phone size={15} className="text-dongker-dark" />
                 <span className="text-sm font-semibold text-dongker-dark">
-                  (0267) 8634232 / 0812 9151 9609
+                  {telepon} / {hp}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={15} className="text-dongker-dark" />
-                <span className="text-sm font-semibold text-dongker-dark">
-                  normantuahhsinaga@yahoo.co.id
-                </span>
+                <span className="text-sm font-semibold text-dongker-dark">{email}</span>
               </div>
-              <span className="text-sm text-dongker-dark font-medium">
-                Senin – Jumat: 08.00 – 16.00 WIB
-              </span>
+              <span className="text-sm text-dongker-dark font-medium">{jam}</span>
             </div>
           </div>
         </section>
@@ -110,7 +113,6 @@ export default async function HomePage() {
               <h2 className="section-title mb-4">Layanan Kenotariatan</h2>
               <div className="divider-gold mx-auto" />
             </div>
-
             {layananPreview && layananPreview.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {layananPreview.map((item, index) => (
@@ -134,7 +136,6 @@ export default async function HomePage() {
             ) : (
               <p className="text-center text-dongker/30 py-10">Belum ada layanan.</p>
             )}
-
             <div className="text-center mt-10">
               <Link href="/layanan" className="btn-outline inline-flex items-center gap-2">
                 Semua Layanan <ArrowRight size={16} />
@@ -156,9 +157,8 @@ export default async function HomePage() {
                 </h2>
                 <div className="w-16 h-0.5 bg-gold mb-6" />
                 <p className="text-cream/60 leading-relaxed mb-8">
-                  Kantor Notaris & PPAT Norman Tuah Hamonangan Sinaga telah dipercaya
-                  melayani masyarakat Karawang dalam berbagai kebutuhan hukum
-                  pertanahan dan kenotariatan.
+                  Kantor Notaris & PPAT {nama} telah dipercaya melayani masyarakat
+                  Karawang dalam berbagai kebutuhan hukum pertanahan dan kenotariatan.
                 </p>
                 <Link href="/prosedur" className="btn-primary inline-flex items-center gap-2">
                   Lihat Alur Pelayanan <ArrowRight size={16} />

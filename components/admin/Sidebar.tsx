@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { LayoutDashboard, FileText, Calendar, LogOut, Briefcase } from "lucide-react";
+import {
+  LayoutDashboard, FileText, Calendar,
+  LogOut, Briefcase, Settings,
+} from "lucide-react";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/artikel", label: "Artikel Hukum", icon: FileText },
   { href: "/admin/kegiatan", label: "Info Kegiatan", icon: Calendar },
   { href: "/admin/layanan", label: "Layanan", icon: Briefcase },
+  { href: "/admin/data-kantor", label: "Data Kantor", icon: Settings },
 ];
 
 export default function AdminSidebar() {

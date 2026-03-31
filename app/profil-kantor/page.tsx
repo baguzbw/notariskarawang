@@ -1,8 +1,21 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getProfilKantor } from "@/lib/profil";
 import { MapPin, Phone, Mail, Clock, Building2 } from "lucide-react";
 
-export default function ProfilKantorPage() {
+export const revalidate = 3600;
+
+export default async function ProfilKantorPage() {
+  const profil = await getProfilKantor();
+
+  const alamat = profil?.alamat ?? "Ruko Perumahan Green Garden Blok AA No.1, Kel. Nagasari, Kec. Karawang Barat, Kab. Karawang";
+  const telepon = profil?.telepon ?? "(0267) 8634232";
+  const hp = profil?.hp ?? "0812 9151 9609";
+  const email = profil?.email ?? "normantuahhsinaga@yahoo.co.id";
+  const jam = profil?.jam_operasional ?? "Senin – Jumat: 08.00 – 16.00 WIB";
+  const gmaps = profil?.gmaps_embed ?? null;
+  const nama = profil?.nama_notaris ?? "Norman Tuah Hamonangan Sinaga";
+
   return (
     <>
       <Navbar />
@@ -25,14 +38,10 @@ export default function ProfilKantorPage() {
                     <h2 className="text-2xl font-semibold text-dongker">Tentang Kantor</h2>
                   </div>
                   <p className="text-dongker/70 leading-relaxed mb-4">
-                    Kantor Notaris & PPAT Norman Tuah Hamonangan Sinaga, Shut, SH, M.Kn berlokasi
-                    di Ruko Perumahan Green Garden Blok AA No.1, Kelurahan Nagasari, Kecamatan
-                    Karawang Barat, Kabupaten Karawang.
-                  </p>
-                  <p className="text-dongker/70 leading-relaxed">
-                    Kantor kami melayani berbagai kebutuhan kenotariatan dan pertanahan masyarakat
-                    dengan standar profesional tinggi, menjunjung nilai kejujuran, keakuratan, dan
-                    transparansi dalam setiap pelayanan.
+                    Kantor Notaris & PPAT {nama} melayani berbagai kebutuhan
+                    kenotariatan dan pertanahan masyarakat dengan standar profesional
+                    tinggi, menjunjung nilai kejujuran, keakuratan, dan transparansi
+                    dalam setiap pelayanan.
                   </p>
                 </div>
 
@@ -43,33 +52,29 @@ export default function ProfilKantorPage() {
                       <MapPin size={18} className="text-gold mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-medium text-dongker">Alamat</p>
-                        <p className="text-sm text-dongker/60">
-                          Ruko Perumahan Green Garden Blok AA No.1,<br />
-                          Kel. Nagasari, Kec. Karawang Barat,<br />
-                          Kab. Karawang
-                        </p>
+                        <p className="text-sm text-dongker/60">{alamat}</p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <Phone size={18} className="text-gold mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-medium text-dongker">Telepon / HP</p>
-                        <p className="text-sm text-dongker/60">(0267) 8634232</p>
-                        <p className="text-sm text-dongker/60">0812 9151 9609</p>
+                        <p className="text-sm text-dongker/60">{telepon}</p>
+                        <p className="text-sm text-dongker/60">{hp}</p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <Mail size={18} className="text-gold mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-medium text-dongker">Email</p>
-                        <p className="text-sm text-dongker/60">normantuahhsinaga@yahoo.co.id</p>
+                        <p className="text-sm text-dongker/60">{email}</p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <Clock size={18} className="text-gold mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-medium text-dongker">Jam Operasional</p>
-                        <p className="text-sm text-dongker/60">Senin – Jumat: 08.00 – 16.00 WIB</p>
+                        <p className="text-sm text-dongker/60">{jam}</p>
                       </div>
                     </li>
                   </ul>
@@ -79,19 +84,23 @@ export default function ProfilKantorPage() {
               <div>
                 <h3 className="text-xl font-semibold text-dongker mb-4">Lokasi Kantor</h3>
                 <div className="w-full aspect-video border border-cream-dark overflow-hidden">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.0!2d107.3!3d-6.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTgnMDAuMCJTIDEwN8KwMTgnMDAuMCJF!5e0!3m2!1sid!2sid!4v1"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    title="Lokasi Kantor Notaris"
-                  />
+                  {gmaps ? (
+                    <iframe
+                      src={gmaps}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      title="Lokasi Kantor Notaris"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-dongker/10 flex items-center justify-center">
+                      <p className="text-sm text-dongker/30">Peta belum dikonfigurasi</p>
+                    </div>
+                  )}
                 </div>
-                <p className="text-xs text-dongker/40 mt-2">
-                  Ruko Perumahan Green Garden Blok AA No.1, Karawang Barat
-                </p>
+                <p className="text-xs text-dongker/40 mt-2">{alamat}</p>
               </div>
             </div>
           </div>

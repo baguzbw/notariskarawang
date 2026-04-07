@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 import AdminSidebar from "@/components/admin/Sidebar";
+import { supabase } from "@/lib/supabase";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [checking, setChecking] = useState(true);
@@ -30,16 +26,16 @@ export default function AdminLayout({
 
   if (checking) {
     return (
-      <div className="min-h-screen bg-dongker flex items-center justify-center">
+      <div className="h-screen bg-dongker flex items-center justify-center">
         <p className="text-cream/40 text-sm">Memeriksa sesi...</p>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen bg-cream">
+    <div className="flex h-screen overflow-hidden bg-cream">
       <AdminSidebar />
-      <main className="flex-1 p-8 overflow-auto">{children}</main>
+      <main className="flex-1 overflow-y-auto p-8">{children}</main>
     </div>
   );
 }

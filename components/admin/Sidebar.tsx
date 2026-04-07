@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import {
   LayoutDashboard, FileText, Calendar,
-  LogOut, Briefcase, Settings,
+  LogOut, Briefcase, Settings, ClipboardList,
 } from "lucide-react";
 
 const navItems = [
@@ -13,6 +13,7 @@ const navItems = [
   { href: "/admin/artikel", label: "Artikel Hukum", icon: FileText },
   { href: "/admin/kegiatan", label: "Info Kegiatan", icon: Calendar },
   { href: "/admin/layanan", label: "Layanan", icon: Briefcase },
+  { href: "/admin/persyaratan", label: "Persyaratan", icon: ClipboardList },
   { href: "/admin/data-kantor", label: "Data Kantor", icon: Settings },
 ];
 

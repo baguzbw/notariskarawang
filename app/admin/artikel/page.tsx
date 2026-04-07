@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { PlusCircle, Pencil, Trash2 } from "lucide-react";
+import { PlusCircle, Pencil } from "lucide-react";
 import DeleteArtikelButton from "./DeleteButton";
 
 export const revalidate = 0;
@@ -8,7 +8,7 @@ export const revalidate = 0;
 export default async function AdminArtikelPage() {
   const { data: artikels } = await supabase
     .from("artikel_hukum")
-    .select("id, judul, kategori, published, created_at")
+    .select("id, judul, created_at")
     .order("created_at", { ascending: false });
 
   return (
@@ -30,8 +30,7 @@ export default async function AdminArtikelPage() {
           <thead>
             <tr className="border-b border-cream-dark bg-cream-dark/40">
               <th className="text-left px-6 py-4 font-semibold text-dongker">Judul</th>
-              <th className="text-left px-6 py-4 font-semibold text-dongker hidden md:table-cell">Kategori</th>
-              <th className="text-left px-6 py-4 font-semibold text-dongker hidden md:table-cell">Status</th>
+              <th className="text-left px-6 py-4 font-semibold text-dongker hidden md:table-cell">Tanggal</th>
               <th className="text-left px-6 py-4 font-semibold text-dongker">Aksi</th>
             </tr>
           </thead>
@@ -39,20 +38,11 @@ export default async function AdminArtikelPage() {
             {artikels && artikels.length > 0 ? (
               artikels.map((a) => (
                 <tr key={a.id} className="border-b border-cream-dark last:border-0 hover:bg-cream-dark/20">
-                  <td className="px-6 py-4 text-dongker font-medium line-clamp-2">
-                    {a.judul}
-                  </td>
+                  <td className="px-6 py-4 text-dongker font-medium">{a.judul}</td>
                   <td className="px-6 py-4 text-dongker/50 hidden md:table-cell">
-                    {a.kategori || "—"}
-                  </td>
-                  <td className="px-6 py-4 hidden md:table-cell">
-                    <span className={`inline-block px-2 py-0.5 text-xs font-medium ${
-                      a.published
-                        ? "bg-green-100 text-green-700"
-                        : "bg-amber-100 text-amber-700"
-                    }`}>
-                      {a.published ? "Dipublikasikan" : "Draft"}
-                    </span>
+                    {new Date(a.created_at).toLocaleDateString("id-ID", {
+                      day: "numeric", month: "short", year: "numeric",
+                    })}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
@@ -69,7 +59,7 @@ export default async function AdminArtikelPage() {
               ))
             ) : (
               <tr>
-                <td colSpan={4} className="px-6 py-12 text-center text-dongker/30">
+                <td colSpan={3} className="px-6 py-12 text-center text-dongker/30">
                   Belum ada artikel.
                 </td>
               </tr>

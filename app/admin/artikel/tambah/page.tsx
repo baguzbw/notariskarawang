@@ -36,7 +36,6 @@ export default function TambahArtikelPage() {
       slug,
       konten,
       thumbnail_url: thumbnailUrl,
-      published: true,
     }]);
 
     if (error) {
@@ -93,7 +92,7 @@ export default function TambahArtikelPage() {
 
         <div className="flex gap-4">
           <button type="submit" disabled={loading} className="btn-primary text-sm disabled:opacity-50">
-            {loading ? "Menyimpan..." : "Simpan & Publikasikan"}
+            {loading ? "Menyimpan..." : "Simpan Artikel"}
           </button>
           <Link href="/admin/artikel" className="btn-outline text-sm">Batal</Link>
         </div>

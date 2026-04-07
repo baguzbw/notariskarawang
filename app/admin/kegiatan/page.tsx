@@ -8,7 +8,7 @@ export const revalidate = 0;
 export default async function AdminKegiatanPage() {
   const { data: kegiatan } = await supabase
     .from("info_kegiatan")
-    .select("id, judul, tanggal_kegiatan, lokasi, published")
+    .select("id, judul, tanggal_kegiatan, lokasi")
     .order("tanggal_kegiatan", { ascending: false });
 
   return (
@@ -31,7 +31,7 @@ export default async function AdminKegiatanPage() {
             <tr className="border-b border-cream-dark bg-cream-dark/40">
               <th className="text-left px-6 py-4 font-semibold text-dongker">Judul</th>
               <th className="text-left px-6 py-4 font-semibold text-dongker hidden md:table-cell">Tanggal</th>
-              <th className="text-left px-6 py-4 font-semibold text-dongker hidden md:table-cell">Status</th>
+              <th className="text-left px-6 py-4 font-semibold text-dongker hidden md:table-cell">Lokasi</th>
               <th className="text-left px-6 py-4 font-semibold text-dongker">Aksi</th>
             </tr>
           </thead>
@@ -45,12 +45,8 @@ export default async function AdminKegiatanPage() {
                       ? new Date(k.tanggal_kegiatan).toLocaleDateString("id-ID")
                       : "—"}
                   </td>
-                  <td className="px-6 py-4 hidden md:table-cell">
-                    <span className={`inline-block px-2 py-0.5 text-xs font-medium ${
-                      k.published ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"
-                    }`}>
-                      {k.published ? "Dipublikasikan" : "Draft"}
-                    </span>
+                  <td className="px-6 py-4 text-dongker/50 hidden md:table-cell">
+                    {k.lokasi || "—"}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">

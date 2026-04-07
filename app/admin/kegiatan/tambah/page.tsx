@@ -28,7 +28,6 @@ export default function TambahKegiatanPage() {
       gambar_url: gambarUrl,
       tanggal_kegiatan: tanggal || null,
       lokasi,
-      published: true,
     }]);
 
     if (error) {
@@ -87,7 +86,7 @@ export default function TambahKegiatanPage() {
 
         <div className="flex gap-4">
           <button type="submit" disabled={loading} className="btn-primary text-sm disabled:opacity-50">
-            {loading ? "Menyimpan..." : "Simpan & Publikasikan"}
+            {loading ? "Menyimpan..." : "Simpan Kegiatan"}
           </button>
           <Link href="/admin/kegiatan" className="btn-outline text-sm">Batal</Link>
         </div>

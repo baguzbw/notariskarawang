@@ -6,7 +6,10 @@ import { Calendar, MapPin } from "lucide-react";
 export const revalidate = 60;
 
 export default async function KegiatanPage() {
-  const { data: kegiatan } = await supabase.from("info_kegiatan").select("*").eq("published", true).order("tanggal_kegiatan", { ascending: false });
+  const { data: kegiatan } = await supabase
+    .from("info_kegiatan")
+    .select("*")
+    .order("tanggal_kegiatan", { ascending: false });
 
   return (
     <>

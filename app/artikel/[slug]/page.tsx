@@ -20,7 +20,6 @@ export default async function ArtikelDetailPage({ params }: Props) {
       .from("artikel_hukum")
       .select("*")
       .eq("slug", slug)
-      .eq("published", true)
       .single(),
     getProfilKantor(),
   ]);

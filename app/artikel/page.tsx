@@ -21,7 +21,6 @@ export default async function ArtikelPage({ searchParams }: Props) {
   const { data: artikels, count } = await supabase
     .from("artikel_hukum")
     .select("id, judul, slug, thumbnail_url, created_at", { count: "exact" })
-    .eq("published", true)
     .order("created_at", { ascending: false })
     .range(from, to);
 
@@ -41,9 +40,6 @@ export default async function ArtikelPage({ searchParams }: Props) {
                 <h1 className="text-4xl md:text-5xl font-semibold mb-4">Artikel Hukum</h1>
                 <div className="w-16 h-0.5 bg-gold" />
               </div>
-              {/* {count !== null && count > 0 && (
-                <p className="text-xs text-cream/30 hidden md:block">{count} artikel tersedia</p>
-              )} */}
             </div>
           </div>
         </section>

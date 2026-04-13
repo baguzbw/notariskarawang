@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 import ImageUpload from "@/components/ImageUpload";
-import { Save, Loader2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { Loader2, Save } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function DataKantorPage() {
   const [form, setForm] = useState({
@@ -51,9 +51,7 @@ export default function DataKantorPage() {
       });
   }, []);
 
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
@@ -65,9 +63,7 @@ export default function DataKantorPage() {
 
     const payload = { ...form, updated_at: new Date().toISOString() };
 
-    const { error } = id
-      ? await supabase.from("profil_kantor").update(payload).eq("id", id)
-      : await supabase.from("profil_kantor").insert([payload]);
+    const { error } = id ? await supabase.from("profil_kantor").update(payload).eq("id", id) : await supabase.from("profil_kantor").insert([payload]);
 
     if (error) {
       setError(error.message);
@@ -88,209 +84,168 @@ export default function DataKantorPage() {
   }
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-semibold text-dongker">Data Kantor</h1>
-        <p className="text-sm text-dongker/50 mt-1">
-          Perubahan akan otomatis tampil di seluruh halaman website.
-        </p>
+    <div className="h-full flex flex-col gap-4">
+      {/* ── HEADER ── */}
+      <div className="flex items-center justify-between shrink-0">
+        <div>
+          <h1 className="text-2xl font-semibold text-dongker">Data Kantor</h1>
+          <p className="text-xs text-dongker/50 mt-0.5">Perubahan otomatis tampil di seluruh halaman website.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          {success && <span className="text-xs text-green-700 bg-green-50 border border-green-200 px-3 py-1.5">Data berhasil disimpan.</span>}
+          {error && <span className="text-xs text-red-600 bg-red-50 border border-red-200 px-3 py-1.5 max-w-xs truncate">{error}</span>}
+          <button type="submit" form="data-kantor-form" disabled={loading} className="inline-flex items-center gap-2 btn-primary text-sm disabled:opacity-50">
+            {loading ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+            {loading ? "Menyimpan..." : "Simpan Semua"}
+          </button>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="max-w-3xl space-y-8">
-        {error && (
-          <div className="bg-red-50 border border-red-200 p-4">
-            <p className="text-sm text-red-600">{error}</p>
+      {/* ── FORM ── */}
+      <form id="data-kantor-form" onSubmit={handleSubmit} className="flex-1 min-h-0 grid grid-cols-[2fr_3fr] gap-5">
+        {/* ── KOLOM KIRI: Profil Notaris ── */}
+        <div className="bg-cream-light border border-cream-dark flex flex-col min-h-0">
+          <div className="px-5 py-3 border-b border-cream-dark shrink-0">
+            <p className="text-[9px] text-gold tracking-[0.2em] uppercase font-medium">Profil Notaris</p>
           </div>
-        )}
-        {success && (
-          <div className="bg-green-50 border border-green-200 p-4">
-            <p className="text-sm text-green-700">Data berhasil disimpan.</p>
-          </div>
-        )}
 
-        {/* ── PROFIL NOTARIS ── */}
-        <div>
-          <p className="text-xs text-gold tracking-[0.2em] uppercase mb-5 font-medium">
-            Profil Notaris
-          </p>
-          <div className="space-y-5">
-            <div>
-              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                Foto Notaris
-              </label>
-              <ImageUpload
-                value={form.foto_url}
-                onChange={(url) => setForm((p) => ({ ...p, foto_url: url }))}
-                folder="profil"
+          <div className="flex-1 min-h-0 flex flex-col gap-4 p-5 overflow-hidden">
+            {/* Foto — natural size, full width */}
+            <div className="shrink-0">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Foto Notaris</label>
+              <ImageUpload value={form.foto_url} onChange={(url) => setForm((p) => ({ ...p, foto_url: url }))} folder="profil" />
+            </div>
+
+            {/* Nama */}
+            <div className="shrink-0">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Nama Notaris *</label>
+              <input
+                name="nama_notaris"
+                value={form.nama_notaris}
+                onChange={handleChange}
+                required
+                className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                  Nama Notaris *
-                </label>
-                <input
-                  name="nama_notaris"
-                  value={form.nama_notaris}
-                  onChange={handleChange}
-                  required
-                  className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                  Gelar
-                </label>
-                <input
-                  name="gelar"
-                  value={form.gelar}
-                  onChange={handleChange}
-                  placeholder="cth: Shut., S.H., M.Kn."
-                  className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
-                />
-              </div>
+            {/* Gelar */}
+            <div className="shrink-0">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Gelar</label>
+              <input
+                name="gelar"
+                value={form.gelar}
+                onChange={handleChange}
+                placeholder="cth: Shut., S.H., M.Kn."
+                className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors"
+              />
             </div>
 
-            <div>
-              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                Latar Belakang
-              </label>
+            {/* Latar Belakang */}
+            <div className="flex-1 min-h-0 flex flex-col">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2 shrink-0">Latar Belakang</label>
               <textarea
                 name="latar_belakang"
                 value={form.latar_belakang}
                 onChange={handleChange}
-                rows={5}
-                className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y"
+                className="flex-1 min-h-0 w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors resize-none"
               />
             </div>
 
-            <div>
-              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
+            {/* Riwayat */}
+            <div className="flex-1 min-h-0 flex flex-col">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2 shrink-0">
                 Riwayat Pendidikan & Karir
+                <span className="ml-1.5 text-dongker/30 normal-case font-normal">(satu baris = satu item)</span>
               </label>
               <textarea
                 name="riwayat"
                 value={form.riwayat}
                 onChange={handleChange}
-                rows={5}
                 placeholder="Tulis satu riwayat per baris"
-                className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y"
+                className="flex-1 min-h-0 w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors resize-none"
               />
-              <p className="text-xs text-dongker/30 mt-1">
-                Satu baris = satu item riwayat.
-              </p>
             </div>
           </div>
         </div>
 
-        <div className="h-px bg-cream-dark" />
+        {/* ── KOLOM KANAN: Info Kantor ── */}
+        <div className="bg-cream-light border border-cream-dark flex flex-col min-h-0">
+          <div className="px-5 py-3 border-b border-cream-dark shrink-0">
+            <p className="text-[9px] text-gold tracking-[0.2em] uppercase font-medium">Informasi Kantor</p>
+          </div>
 
-        {/* ── INFO KANTOR ── */}
-        <div>
-          <p className="text-xs text-gold tracking-[0.2em] uppercase mb-5 font-medium">
-            Informasi Kantor
-          </p>
-          <div className="space-y-5">
-            <div>
-              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                Alamat Kantor
-              </label>
+          <div className="flex-1 min-h-0 flex flex-col gap-4 p-5 overflow-hidden">
+            {/* Alamat */}
+            <div className="shrink-0">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Alamat Kantor</label>
               <textarea
                 name="alamat"
                 value={form.alamat}
                 onChange={handleChange}
                 rows={3}
-                className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y"
+                className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors resize-none"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Telepon + HP */}
+            <div className="grid grid-cols-2 gap-4 shrink-0">
               <div>
-                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                  Telepon
-                </label>
+                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Telepon</label>
                 <input
                   name="telepon"
                   value={form.telepon}
                   onChange={handleChange}
                   placeholder="cth: (0267) 8634232"
-                  className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
+                  className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors"
                 />
               </div>
               <div>
-                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                  HP / WhatsApp
-                </label>
+                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">HP / WhatsApp</label>
                 <input
                   name="hp"
                   value={form.hp}
                   onChange={handleChange}
                   placeholder="cth: 0812 9151 9609"
-                  className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
+                  className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Email + Jam */}
+            <div className="grid grid-cols-2 gap-4 shrink-0">
               <div>
-                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                  Email
-                </label>
-                <input
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  type="email"
-                  className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
-                />
+                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Email</label>
+                <input name="email" value={form.email} onChange={handleChange} type="email" className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors" />
               </div>
               <div>
-                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                  Jam Operasional
-                </label>
+                <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">Jam Operasional</label>
                 <input
                   name="jam_operasional"
                   value={form.jam_operasional}
                   onChange={handleChange}
-                  placeholder="cth: Senin – Jumat: 08.00 – 16.00 WIB"
-                  className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors"
+                  placeholder="cth: Senin – Jumat: 08.00 – 16.00"
+                  className="w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors"
                 />
               </div>
             </div>
 
-            <div>
-              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2">
-                URL Google Maps (iframe src)
+            {/* GMaps */}
+            <div className="flex-1 min-h-0 flex flex-col">
+              <label className="text-xs text-dongker/50 tracking-wider uppercase block mb-2 shrink-0">
+                URL Google Maps
+                <span className="ml-1.5 text-dongker/30 normal-case font-normal">(iframe src)</span>
               </label>
               <textarea
                 name="gmaps_embed"
                 value={form.gmaps_embed}
                 onChange={handleChange}
-                rows={3}
                 placeholder="Paste URL dari Google Maps → Share → Embed → salin bagian src='...' saja"
-                className="w-full border border-cream-dark bg-cream-light text-dongker text-sm px-4 py-3 focus:outline-none focus:border-dongker transition-colors resize-y font-mono text-xs"
+                className="flex-1 min-h-0 w-full border border-cream-dark bg-cream text-dongker text-sm px-4 py-2.5 focus:outline-none focus:border-dongker transition-colors resize-none font-mono text-xs"
               />
-              <p className="text-xs text-dongker/30 mt-1">
-                Buka Google Maps → Share → Embed a map → copy hanya URL di dalam src=&quot;...&quot;
-              </p>
+              <p className="text-[10px] text-dongker/30 mt-1.5 shrink-0">Google Maps → Share → Embed a map → copy URL di dalam src=&quot;...&quot;</p>
             </div>
           </div>
         </div>
-
-        {/* Submit */}
-        <button
-          type="submit"
-          disabled={loading}
-          className="inline-flex items-center gap-2 btn-primary disabled:opacity-50"
-        >
-          {loading ? (
-            <Loader2 size={16} className="animate-spin" />
-          ) : (
-            <Save size={16} />
-          )}
-          {loading ? "Menyimpan..." : "Simpan Semua Perubahan"}
-        </button>
       </form>
     </div>
   );

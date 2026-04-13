@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const navLinks = [
   { href: "/profil-notaris", label: "Profil Notaris" },
@@ -16,6 +17,11 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    return pathname === href || pathname.startsWith(href + "/");
+  }
 
   return (
     <header className="bg-dongker text-cream shadow-md sticky top-0 z-50">
@@ -31,21 +37,15 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-3 py-2 text-sm text-cream/80 hover:text-cream hover:bg-dongker-light transition-colors duration-150 rounded-sm"
-              >
+              <Link key={link.href} href={link.href} className={`relative px-3 py-2 text-sm transition-colors duration-150 rounded-sm ${isActive(link.href) ? "text-gold" : "text-cream/70 hover:text-cream hover:bg-dongker-light"}`}>
                 {link.label}
+                {isActive(link.href) && <span className="absolute bottom-0 left-3 right-3 h-px bg-gold" />}
               </Link>
             ))}
           </nav>
 
           {/* Mobile Toggle */}
-          <button
-            className="lg:hidden p-2 text-cream"
-            onClick={() => setOpen(!open)}
-          >
+          <button className="lg:hidden p-2 text-cream" onClick={() => setOpen(!open)}>
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
@@ -59,9 +59,10 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block px-6 py-3 text-sm text-cream/80 hover:text-cream hover:bg-dongker-light transition-colors"
+              className={`flex items-center justify-between px-6 py-3 text-sm transition-colors ${isActive(link.href) ? "text-gold bg-dongker-light/30 border-l-2 border-gold" : "text-cream/70 hover:text-cream hover:bg-dongker-light"}`}
             >
               {link.label}
+              {isActive(link.href) && <span className="w-1.5 h-1.5 rounded-full bg-gold" />}
             </Link>
           ))}
         </div>

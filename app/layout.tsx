@@ -8,8 +8,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Kantor Notaris",
-  description: "Kantor Notaris & PPAT - Layanan Kenotariatan Profesional",
+  title: "Notaris Norman",
+  description: "Notaris Norman & PPAT - Layanan Kenotariatan Profesional",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
